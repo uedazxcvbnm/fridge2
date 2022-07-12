@@ -8,10 +8,13 @@ import './page1.dart';
 import './page2.dart';
 import './popup_check.dart';
 import './nextpage.dart';
+import './provider.dart';
+import './main3_4.dart';
 /*import './page3.dart';
 import './page4.dart';*/
 import './database_myref.dart';
 import './database_material.dart';
+//import './provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:intl/intl.dart';
@@ -19,13 +22,14 @@ import 'dart:async';
 import 'package:stream_transform/stream_transform.dart';
 import 'package:stack_trace/stack_trace.dart';
 import 'package:blobs/blobs.dart';
-import './main3_4.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
 
+GlobalKey navBarGlobalKey = GlobalKey(debugLabel: 'bottomAppBar');
 //BottomNavigationBar
 void main() {
   //Stetho.initialize();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -33,10 +37,15 @@ class MyApp extends StatelessWidget {
   static const String _title = 'BottomNavBar Code Sample';
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: _title,
+      title: 'BottomNavBar Code Sample',
       home: MyStatefulWidget(),
+      routes: {
+        //'/': (context) => MyHomePage(),
+        '/page2': (context) => NextPage(),
+        //'/page2': (context) => InputTest(),
+      },
     );
   }
 }
@@ -56,6 +65,7 @@ class MyStatefulWidget extends StatefulWidget {
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
+//画面下部のバー　画面移動するボタン
 //画面下部のバー　画面移動するボタン
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
@@ -95,7 +105,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         //画面を移動するボタン
         items: [
           PersistentBottomNavBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.shopping_cart),
             activeColorPrimary: Colors.orange,
             inactiveColorPrimary: Colors.white,
             //Flutter3なのでここではlabelを使うべき
@@ -104,7 +114,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             //backgroundColor: Colors.green,
           ),
           PersistentBottomNavBarItem(
-              icon: Icon(Icons.shopping_cart),
+              icon: Icon(Icons.home),
               activeColorPrimary: Colors.orange,
               inactiveColorPrimary: Colors.white
               //label: 'ラベル2',

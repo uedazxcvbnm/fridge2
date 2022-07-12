@@ -2,10 +2,13 @@
 // alertdialog https://www.kamo-it.org/blog/flutter-dialog/
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import './main.dart';
 import './page1.dart';
 import './page2.dart';
 import './nextpage.dart';
 import './main3_4.dart';
+//import './provider.dart';
+//import './provider.dart';
 /*import './page3.dart';
 import './page4.dart';*/
 import './database_myref.dart';
@@ -17,6 +20,9 @@ import 'package:stream_transform/stream_transform.dart';
 import './main.dart';
 import 'package:blobs/blobs.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
+
+//final BottomNavigationBar navigationBar = navBarGlobalKey.currentWidget;
 
 // popUPPage 登録された食品の最終確認画面
 class popUpPage extends StatefulWidget {
@@ -65,14 +71,6 @@ class _popUpState extends State<popUpPage> {
   //非同期関数定義
   int apple_counter = 0;
   var _now = DateFormat('yyyy-MM-dd').format(DateTime.now());
-
-  int _selectedIndex = 0;
-  final _childPageList = [
-    //食品の登録画面
-    MyHomePage(),
-    //食品を表示する画面
-    NextPage(),
-  ];
 
   //ポップアップ表示はできそうにない
   @override
@@ -158,11 +156,7 @@ class _popUpState extends State<popUpPage> {
         ElevatedButton(
           child: Text('はい'),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    // （2） 実際に表示するページ(ウィジェット)を指定する
-                    builder: (context) => NextPage()));
+            Navigator.pushNamed(context, '/page2');
           },
         ),
       ],
